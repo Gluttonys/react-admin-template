@@ -1,0 +1,56 @@
+.button_group {
+  @default-color : #8e8e8e;
+  @hover-color   : #f20639;
+  @active-color  : #0843c3;
+
+  @table-radius  : 5px;
+
+  @border-width  : 1px;
+
+  .button_item {
+    padding     : 4px 2em;
+    box-sizing  : border-box;
+    border      : @border-width solid @default-color;
+    cursor      : pointer;
+
+    color       : @default-color;
+    font-size   : 16px;
+
+    transition  : .1s;
+    will-change : border;
+
+    &:hover {
+      position     : relative;
+      z-index      : 99;
+
+      color        : @hover-color;
+      border-color : @hover-color;
+      transition   : border-right-width .05s;
+    }
+
+    &:first-child {
+      border-top-left-radius    : @table-radius;
+      border-bottom-left-radius : @table-radius;
+    }
+
+    &:last-child {
+      border-top-right-radius    : @table-radius;
+      border-bottom-right-radius : @table-radius;
+    }
+
+    &__active {
+      position           : relative;
+      z-index            : 9;
+
+      border-right-width : @border-width;
+      color              : @active-color;
+      border-color       : @active-color;
+    }
+  }
+
+  each(range(4), {
+    .button_item:nth-child(@{value}) {
+      transform : translateX(-@value * @border-width);
+    }
+  });
+}
